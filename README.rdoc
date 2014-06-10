@@ -1,0 +1,44 @@
+== README
+This is simple application for traking some activity
+of a client. Main entities are:
+- Currency
+- Country
+- Trip
+
+Admin user can manage trip records, mark countries visited and
+currencies collected.
+Simple user can only see the progress of admin in collecting currencies.
+
+For getting base data we use http://www.webservicex.net
+All requests and results in soap format.
+For parse it we use savon (soap client)&
+
+To make app work on your computer, you need to
+do this simple steps:
+
+* Get app from github:
+
+
+* Bundle 
+$ bundle install
+
+* Database creation
+$ rake db:create
+
+* Database initialization
+$ rake db:migrate
+$ rake db:seed
+
+Last command will get all needed data from http://www.webservicex.net,
+using savon - soap client, and fill db with this data.
+Then create admin record.
+
+* How to run the test suite
+Test part was not implemented
+
+make all db commands.
+Then: rails s 
+
+Enjoy!
+
+* ...

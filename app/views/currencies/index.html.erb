@@ -1,0 +1,29 @@
+<h1>Listing currencies</h1>
+
+<%= link_to 'all', "#", :onclick => "$('.disactive').show(); return false" %> | <%= link_to 'active', "#", :onclick => "$('.disactive').hide(); return false" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>( all / unvisited)</th>
+      <th>Name</th>
+      <th>Code</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @currencies.each do |currency| %>
+      <%- unvisited_count = currency.unvisited_countries_count %>
+      <tr class="<%= unvisited_count > 0 ? 'active' : 'disactive'%>">
+        <td><%= ["(", currency.countries.count, "/", unvisited_count, ")"].join(' ') %></td>
+        <td><%= link_to currency.name, currency %></td>
+        <td><%= currency.code %></td>
+        <td><%= link_to 'Show', currency %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

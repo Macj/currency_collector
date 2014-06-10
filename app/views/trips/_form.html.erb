@@ -1,0 +1,35 @@
+<%= form_for(@trip) do |f| %>
+  <% if @trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+      <ul>
+      <% @trip.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :trip_date %><br>
+    <%= f.date_select :t_date %>
+  </div>
+
+  <% if @trip.new_record?%>
+    <%- Country.all.each do|country| %>
+    <div class="field" style="float:left; width:30%">
+      <label> <%= country.name %></label>
+      <input id='countries[<%=country.id %>]' name='countries[<%= country.id %>]' type='checkbox'>
+    </div>
+    <% end %>
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Currency name:</strong>
+  <%= @currency.name %>
+</p>
+
+<p>
+  <strong>Countries:</strong>
+  <br/>
+  <%- @countries.each do |country|%>
+    <%- flag = country.visited_for(@currency)%>
+    <table>
+      <tr>
+        <th> Is visited </th>
+        <th> Country name </th>
+        <% if can? :manage, @currency %>
+          <th> Actions </th>
+        <% end %>
+      </tr>
+      <tr>
+        <td>
+          <span style='color:<%= flag ? "#01DF74" : "#DF0101" %>'>
+            <%= flag ? "visited".html_safe() : "free to go"%>
+          </span></td>
+        <td>
+          <%= country.name %></td>
+        <td>
+          <% if can? :manage, @currency %>
+            <%= flag ? 
+    link_to("unvisit", unvisit_visited_country_path(:country_id => country.id, :currency_id => @currency.id)):
+    link_to("visit", visit_visited_country_path(:country_id => country.id, :currency_id => @currency.id))%> 
+          <% end %>
+        </td>
+    </table>
+    <br/>
+  <%end%>
+</p>
+
+<%= link_to 'Back', currencies_path %>

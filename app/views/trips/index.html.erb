@@ -1,0 +1,36 @@
+<h1>Listing trips</h1>
+
+<p>
+  <span>
+    Visited countries: <%= @visited_countries_count%>
+<br/>
+<% if can? :create, Trip %>
+  <%= link_to 'New Trip', new_trip_path %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Trip date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trips.each do |trip| %>
+      <tr>
+        <td><%= trip.description %></td>
+        <td><%= trip.t_date %></td>
+        <td><%= link_to 'Show', trip %></td>
+        <% if can? :manage, trip %>
+          <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
+          <td><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
